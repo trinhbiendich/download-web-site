@@ -47,7 +47,7 @@ public class MyTest {
 	public synchronized void downloadHtmlbyUrl(String url) {
 		System.out.println("\n\n");
 		System.out.println("|=========================================================================|");
-		System.out.println("Process for : " + url);
+		System.out.println("Process for quere [" + links.size() + "]: " + url);
 		if(StringUtils.isBlank(url) || processedLinks.contains(url)){
 			nextUrl();
 			return;
@@ -87,6 +87,8 @@ public class MyTest {
 				link = link.substring(0, link.indexOf("#"));
 			if(link.contains("?"))
 				link = link.substring(0, link.indexOf("?"));
+			
+			
 			FileUtils.saveFileFromUrl(link, config);
 		}
 	}

@@ -41,6 +41,10 @@ public class FileUtils {
 		FileInfo fileInfo = new FileInfo(url, config);
 		File folderToSave = getFolderToSaveFile(fileInfo.getFilePath(), config);
 		File file = new File(folderToSave, fileInfo.getFileName());
+		if(file.exists() && !config.getOverrideFile()){
+			System.out.println("File [" + fileInfo.getFileName() + "] is downloaded");
+			return;
+		}
 		
 		byte[] fileContent = null;
 		if(url.startsWith("https")){

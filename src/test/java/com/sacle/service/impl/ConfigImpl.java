@@ -15,6 +15,7 @@ public class ConfigImpl implements Config {
 	private String folderSave;
 	private String siteName;
 	private String siteUrl;
+	private Boolean overrideFile;
 	
 	
 	public ConfigImpl(){
@@ -33,6 +34,7 @@ public class ConfigImpl implements Config {
 			this.folderSave = prop.getProperty(Constants.FOLDER_TO_SAVE);
 			this.siteName = prop.getProperty(Constants.SITE_NAME);
 			this.siteUrl = prop.getProperty(Constants.SITE_URL);
+			this.overrideFile = Boolean.parseBoolean(prop.getProperty(Constants.OVERRIDE_FILE));
 			
 		} catch (IOException ex) {
 			System.out.println("Could not read property : " + ex.getMessage());
@@ -66,6 +68,11 @@ public class ConfigImpl implements Config {
 	@Override
 	public String getSite() {
 		return siteUrl;
+	}
+	
+	@Override
+	public boolean getOverrideFile() {
+		return overrideFile;
 	}
 	
 	@Override

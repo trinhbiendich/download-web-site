@@ -2,9 +2,13 @@ package com.sacle.utils;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -56,6 +60,28 @@ public class ContentUtils {
 			System.out.println("eee : " + ex.getMessage());
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		download("https://chugai-pharm.jp/pr/drug/pdf/drug_hip_code.pdf", new File("/media/TOOLS/sample.pdf"));
+	}
+	
+	public static void download(final String url, final File destination) throws IOException {
+		final URLConnection connection = new URL(url).openConnection();
+		connection.setConnectTimeout(60000);
+		connection.setReadTimeout(60000);
+		connection.addRequestProperty("User-Agent", "Mozilla/5.0");
+		final FileOutputStream output = new FileOutputStream(destination, false);
+		final byte[] buffer = new byte[2048];
+		int read;
+		final InputStream input = connection.getInputStream();
+		while ((read = input.read(buffer)) > -1){
+			System.out.println(read);
+			output.write(buffer, 0, read);
+		}
+		output.flush();
+		output.close();
+		input.close();
 	}
 	
 	public static byte[] urlToBytes(String url) {

@@ -7,6 +7,7 @@ public interface Config {
 	String getFolderToSave();
 	String getSiteName();
 	String getSite();
+	boolean getOverrideFile();
 	
 	File getRootFolder();
 	String showInfo();
