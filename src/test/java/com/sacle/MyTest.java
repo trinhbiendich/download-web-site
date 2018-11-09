@@ -44,17 +44,11 @@ public class MyTest {
 		downloadHtmlbyUrl(config.getSite());
 	}
 	
-	private void downloadHtmlbyUrl(String url) {
+	public synchronized void downloadHtmlbyUrl(String url) {
 		System.out.println("\n\n");
 		System.out.println("|=========================================================================|");
 		System.out.println("Process for : " + url);
 		if(StringUtils.isBlank(url) || processedLinks.contains(url)){
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			nextUrl();
 			return;
 		}
@@ -80,17 +74,10 @@ public class MyTest {
 		//save html
 		FileUtils.saveFileFromString(fileInfo.getFilePath(), fileInfo.getFileName(), driver.getPageSource(), config);
 		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		nextUrl();
 	}
 	
-	private void processFile(String tag, String attr) {
+	public synchronized void processFile(String tag, String attr) {
 		List<WebElement> linkTags = driver.findElements(By.tagName(tag));
 		for(WebElement element : linkTags){
 			String link = element.getAttribute(attr);
@@ -104,19 +91,19 @@ public class MyTest {
 		}
 	}
 
-	private void processedLink(String url){
+	public synchronized void processedLink(String url){
 		if(!processedLinks.contains(url))
 			processedLinks.add(url);
 		if(links.contains(url))
 			links.remove(url);
 	}
 	
-	private void nextUrl(){
+	public synchronized void nextUrl(){
 		if(links.size() > 0)
 			downloadHtmlbyUrl(links.get(0));
 	}
 	
-	private void processUrl(){
+	public synchronized void processUrl(){
 		List<WebElement> linkA = driver.findElements(By.tagName("a"));
 		int total = 0;
 		for(WebElement element : linkA){
