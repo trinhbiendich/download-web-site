@@ -1,4 +1,4 @@
-package com.sacle;
+package com.sacletest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,10 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.sacle.model.FileInfo;
-import com.sacle.service.Config;
-import com.sacle.service.impl.ConfigImpl;
-import com.sacle.utils.FileUtils;
+import com.sacletest.model.FileInfo;
+import com.sacletest.service.Config;
+import com.sacletest.service.impl.ConfigImpl;
+import com.sacletest.utils.FileUtils;
 
 public class MyTest {
 	public static WebDriver driver;
@@ -72,7 +72,8 @@ public class MyTest {
 		processFile("img", "src");
 		
 		//save html
-		FileUtils.saveFileFromString(fileInfo.getFilePath(), fileInfo.getFileName(), driver.getPageSource(), config);
+		FileUtils.saveFileFromUrl(url, config);
+		//FileUtils.saveFileFromString(fileInfo.getFilePath(), fileInfo.getFileName(), driver.getPageSource(), config);
 		
 		nextUrl();
 	}

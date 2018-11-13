@@ -1,4 +1,4 @@
-package com.sacle.utils;
+package com.sacletest.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
-import com.sacle.model.FileInfo;
-import com.sacle.service.Config;
+import com.sacletest.model.FileInfo;
+import com.sacletest.service.Config;
 
 public class FileUtils {
 	public static File getFolderToSaveFile(String filePath, Config config){

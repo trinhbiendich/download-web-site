@@ -1,4 +1,4 @@
-package com.sacle.utils;
+package com.sacletest.utils;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,35 +16,33 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class ContentUtils {
-	
+
 	public static byte[] urlHttpsToBytes(String url) {
 		byte[] result = null;
 		try {
 			// Create a new trust manager that trust all certificates
-			TrustManager[] trustAllCerts = new TrustManager[]{
-			    new X509TrustManager() {
-			        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-			            return null;
-			        }
-			        public void checkClientTrusted(
-			            java.security.cert.X509Certificate[] certs, String authType) {
-			        }
-			        public void checkServerTrusted(
-			            java.security.cert.X509Certificate[] certs, String authType) {
-			        }
-			    }
-			};
+			TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+				public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+					return null;
+				}
+
+				public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+				}
+
+				public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+				}
+			} };
 
 			// Activate the new trust manager
 			try {
-			    SSLContext sc = SSLContext.getInstance("SSL");
-			    sc.init(null, trustAllCerts, new java.security.SecureRandom());
-			    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+				SSLContext sc = SSLContext.getInstance("SSL");
+				sc.init(null, trustAllCerts, new java.security.SecureRandom());
+				HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			} catch (Exception e) {
 			}
 			URL uri = new URL(url);
-			HttpURLConnection httpcon = (HttpURLConnection) uri.openConnection(); 
-			httpcon.addRequestProperty("User-Agent", "Mozilla/4.76"); 
+			HttpURLConnection httpcon = (HttpURLConnection) uri.openConnection();
+			httpcon.addRequestProperty("User-Agent", "Mozilla/4.76");
 			System.setProperty("http.agent", "Chrome");
 			InputStream in = httpcon.getInputStream();
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -57,15 +55,11 @@ public class ContentUtils {
 			in.close();
 			result = out.toByteArray();
 		} catch (Exception ex) {
-			System.out.println("eee : " + ex.getMessage());
+			System.out.println("Error when read bytes from https : " + ex.getMessage());
 		}
 		return result;
 	}
-	
-	public static void main(String[] args) throws IOException {
-		download("https://chugai-pharm.jp/pr/drug/pdf/drug_hip_code.pdf", new File("/media/TOOLS/sample.pdf"));
-	}
-	
+
 	public static void download(final String url, final File destination) throws IOException {
 		final URLConnection connection = new URL(url).openConnection();
 		connection.setConnectTimeout(60000);
@@ -75,7 +69,7 @@ public class ContentUtils {
 		final byte[] buffer = new byte[2048];
 		int read;
 		final InputStream input = connection.getInputStream();
-		while ((read = input.read(buffer)) > -1){
+		while ((read = input.read(buffer)) > -1) {
 			System.out.println(read);
 			output.write(buffer, 0, read);
 		}
@@ -83,7 +77,7 @@ public class ContentUtils {
 		output.close();
 		input.close();
 	}
-	
+
 	public static byte[] urlToBytes(String url) {
 		byte[] result = null;
 		try {
