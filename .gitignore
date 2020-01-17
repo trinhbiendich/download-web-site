@@ -3,3 +3,6 @@
 target*
 sourcehtml*
 .settings*
+
+.idea
+.idea/*
