@@ -1,1 +1,3 @@
-# download-web-site
+# Download website using selenium test
+
+`mvnw clean install`
