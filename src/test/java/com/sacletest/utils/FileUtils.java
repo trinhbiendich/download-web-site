@@ -7,10 +7,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
+import com.sacletest.MyTest;
 import com.sacletest.model.FileInfo;
 import com.sacletest.service.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileUtils {
+	private static Logger log = LoggerFactory.getLogger(FileUtils.class);
+
 	public static File getFolderToSaveFile(String filePath, Config config){
 		File folderToSave = new File(config.getRootFolder(), filePath);
 		if (!folderToSave.exists()) {
@@ -42,7 +47,7 @@ public class FileUtils {
 		File folderToSave = getFolderToSaveFile(fileInfo.getFilePath(), config);
 		File file = new File(folderToSave, fileInfo.getFileName());
 		if(file.exists() && !config.getOverrideFile()){
-			System.out.println("File [" + fileInfo.getFileName() + "] is downloaded");
+			log.debug("File [{}] is downloaded", fileInfo.getFileName());
 			return;
 		}
 		
@@ -56,9 +61,8 @@ public class FileUtils {
         if (fileContent != null) {
             try (FileOutputStream fos = new FileOutputStream(file);) {
                 fos.write(fileContent);
-                fos.close();
-            } catch (Exception ex) {
-                System.out.println("Can't save file : " + ex.getMessage());
+			} catch (Exception ex) {
+                log.error("Can't save file {}", ex.getMessage());
             }
         }
 	}

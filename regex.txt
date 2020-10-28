@@ -1,1 +1,1 @@
-((https?|ftp|gopher|telnet|file):((//)|(\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)
+((http?|https?|ftp|gopher|telnet|file):((//)|(\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)

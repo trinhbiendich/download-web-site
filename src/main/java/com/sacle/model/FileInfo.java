@@ -25,6 +25,9 @@ public class FileInfo {
 		this.filePath = filePath;
 	}
 	public String getFileName() {
+		if (fileName.contains("?")) {
+			return fileName.substring(0, fileName.indexOf("?"));
+		}
 		return fileName;
 	}
 	public void setFileName(String fileName) {
