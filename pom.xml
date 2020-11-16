@@ -12,7 +12,7 @@
 		<cucumber.version>1.2.5</cucumber.version>
 		<junit.version>4.4</junit.version>
 		<picocontainer.version>2.15</picocontainer.version>
-		<jetty.version>9.4.7.v20170914</jetty.version>
+		<jetty.version>9.4.34.v20201102</jetty.version>
 		<selenium.version>3.11.0</selenium.version>
 		<ashot.version>1.5.4</ashot.version>
 	</properties>
