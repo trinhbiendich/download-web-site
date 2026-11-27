@@ -1,11 +1,13 @@
 # Download Website with Selenium
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Java](https://img.shields.io/badge/Java-8-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-3.11.0-43B02A.svg)](https://www.selenium.dev/)
-[![Maven](https://img.shields.io/badge/Maven-Wrapper-C71A36.svg)](https://maven.apache.org/)
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://adoptium.net/)
+[![Selenium](https://img.shields.io/badge/Selenium-4-43B02A.svg)](https://www.selenium.dev/)
+[![Maven](https://img.shields.io/badge/Maven-3.9+-C71A36.svg)](https://maven.apache.org/)
 
 A Java and Selenium WebDriver website downloader that recursively crawls web pages in Firefox, mirrors HTML pages and static assets (CSS, JavaScript, images) to a local directory structure, and includes a log-based recovery utility for fetching missing 404 assets.
+
+> **Legacy release:** The original Java 8 / Selenium 3 version is archived under the [`v0.1.0-legacy`](https://github.com/trinhbiendich/download-web-site/releases/tag/v0.1.0-legacy) tag and GitHub Release.
 
 ## Key Features
 
@@ -17,17 +19,17 @@ A Java and Selenium WebDriver website downloader that recursively crawls web pag
 
 ## Tech Stack
 
-- **Language**: Java 8
-- **Browser Automation**: Selenium WebDriver 3.11.0 + Firefox GeckoDriver (`drivers/geckodriver.exe`, `drivers/geckodriver`)
-- **Build & Test Runner**: Apache Maven (with `mvnw` / `mvnw.cmd` wrapper), JUnit 4, Maven Surefire Plugin
-- **Utilities & Logging**: Apache Commons (`commons-lang3`, `commons-io`), SLF4J / Log4j 2
+- **Language**: Java 17
+- **Browser Automation**: Selenium WebDriver 4 + Firefox GeckoDriver (`drivers/geckodriver.exe`, `drivers/geckodriver`)
+- **Build & Test Runner**: Apache Maven 3.9+ (with `mvnw` / `mvnw.cmd` wrapper), JUnit 4, Maven Surefire Plugin
+- **Utilities & Logging**: Apache Commons (`commons-lang3`, `commons-io`), SLF4J 2 / Logback
 
 ## Project Structure
 
 ```text
 download-web-site/
 ├── config.properties                    # Target site URL, local output path, and host rewrite settings
-├── pom.xml                              # Maven dependencies and Java 8 / Surefire build configuration
+├── pom.xml                              # Maven dependencies and Java 17 / Surefire build configuration
 ├── mvnw / mvnw.cmd                      # Maven Wrapper scripts (Unix / Windows)
 ├── regex.txt                            # URL extraction regex used by ValidData
 ├── error.txt                            # Input log file containing missing/404 asset URLs for recovery
@@ -51,9 +53,9 @@ download-web-site/
 
 ## Prerequisites
 
-- **JDK 8** (or compatible JDK with Java 8 compilation support)
+- **JDK 17** (or compatible newer JDK)
 - **Mozilla Firefox** installed locally (used by Selenium `FirefoxDriver`)
-- **Maven** (optional — the repository includes the Maven Wrapper `mvnw` / `mvnw.cmd`)
+- **Apache Maven 3.9+** (or the included `mvnw` / `mvnw.cmd` wrapper)
 
 > **Platform note:** `src/test/java/com/sacletest/MyTest.java` loads `drivers/geckodriver.exe` by default (Windows). On Linux/macOS, update the driver path or use a compatible GeckoDriver binary for your installed Firefox version.
 

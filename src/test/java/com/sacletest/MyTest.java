@@ -17,10 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MyTest {
     public static WebDriver driver;
@@ -42,7 +42,9 @@ public class MyTest {
 
     @AfterClass
     public static void afterClass() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
@@ -73,7 +75,7 @@ public class MyTest {
 
         //Open url
         driver.get(url);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         log.debug("Path : " + fileInfo.getFilePath());
 
